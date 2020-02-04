@@ -46,5 +46,14 @@ class Player(GameObject):
                 move_y = hit["gap_y"]
                 self.vel_y = 0
         self.y += move_y
+        
+        if self.x < 0:
+            self.x += self.game.width
+        elif self.x > self.game.width:
+            self.x -= self.game.width
+        if self.y < 0:
+            self.y += self.game.height
+        elif self.y > self.game.height:
+            self.y -= self.game.height
 
         self.collider.x, self.collider.y = self.x, self.y
