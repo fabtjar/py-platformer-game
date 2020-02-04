@@ -27,13 +27,15 @@ class Player(GameObject):
         move_y = self.vel_y * delta_time
 
         for collider in self.level_colliders:
-            if self.collider.is_overlapping(collider, move_x, 0):
-                move_x = 0
+            hit = self.collider.get_overlapping(collider, move_x, 0)
+            if hit:
+                move_x = hit["gap_x"]
         self.x += move_x
 
         for collider in self.level_colliders:
-            if self.collider.is_overlapping(collider, 0, move_y):
-                move_y = 0
+            hit = self.collider.get_overlapping(collider, 0, move_y)
+            if hit:
+                move_y = hit["gap_y"]
         self.y += move_y
 
         self.collider.x, self.collider.y = self.x, self.y
