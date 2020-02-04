@@ -29,9 +29,11 @@ class Player(GameObject):
         for collider in self.level_colliders:
             if self.collider.is_overlapping(collider, move_x, 0):
                 move_x = 0
-            if self.collider.is_overlapping(collider, move_x, move_y):
-                move_y = 0
-
         self.x += move_x
+
+        for collider in self.level_colliders:
+            if self.collider.is_overlapping(collider, 0, move_y):
+                move_y = 0
         self.y += move_y
+
         self.collider.x, self.collider.y = self.x, self.y
