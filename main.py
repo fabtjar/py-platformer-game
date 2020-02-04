@@ -17,6 +17,7 @@ def main():
     level = Level("wall", GRID_SIZE)
     player = Player(game, "player", 150, 50)
     player.keyboard = game.keyboard
+    player.level_colliders = level.get_colliders()
 
     def update(delta_time):
         player.update(delta_time)

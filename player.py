@@ -7,6 +7,7 @@ class Player(GameObject):
         super().__init__(game, image, x, y)
         self.vel = 200
         self.keyboard = None
+        self.level_colliders = None
 
     def update(self, delta_time):
         input_hor, input_ver = 0, 0
@@ -22,4 +23,15 @@ class Player(GameObject):
         self.vel_x = input_hor * self.vel
         self.vel_y = input_ver * self.vel
 
-        super().update(delta_time)
+        move_x = self.vel_x * delta_time
+        move_y = self.vel_y * delta_time
+
+        for collider in self.level_colliders:
+            if self.collider.is_overlapping(collider, move_x, 0):
+                move_x = 0
+            if self.collider.is_overlapping(collider, move_x, move_y):
+                move_y = 0
+
+        self.x += move_x
+        self.y += move_y
+        self.collider.x, self.collider.y = self.x, self.y
