@@ -15,7 +15,7 @@ def main():
     })
 
     level = Level("wall", GRID_SIZE)
-    player = Player("player", 150, 50)
+    player = Player(game, "player", 150, 50)
     player.keyboard = game.keyboard
 
     def update(delta_time):

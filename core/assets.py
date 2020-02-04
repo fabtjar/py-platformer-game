@@ -1,3 +1,5 @@
+import ctypes
+
 from sdl2 import *
 from sdl2 import sdlimage
 
@@ -16,6 +18,12 @@ class AssetsManager:
 
     def get_image(self, name):
         return self._images[name]
+
+    def get_image_size(self, name):
+        width = ctypes.c_int()
+        height = ctypes.c_int()
+        SDL_QueryTexture(self._images[name], None, None, width, height)
+        return width.value, height.value
 
     def destroy(self):
         for image in self._images.values():

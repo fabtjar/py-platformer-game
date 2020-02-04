@@ -3,8 +3,8 @@ from core.keyboard import Keyboard
 
 
 class Player(GameObject):
-    def __init__(self, image, x=0, y=0):
-        super().__init__(image, x, y)
+    def __init__(self, game, image, x=0, y=0):
+        super().__init__(game, image, x, y)
         self.vel = 200
         self.keyboard = None
 
