@@ -1,6 +1,7 @@
 # Py Platformer Game
 This is a basic platformer game made with Python.
 It uses [PySDL2](https://github.com/marcusva/py-sdl2), a Python ctypes wrapper around SDL2.
+![](screenshot.png)
 
 ## Setup
 You need to have a working SDL2 library on your target system.
