@@ -7,7 +7,7 @@ class Player(GameObject):
         super().__init__(game, image, x, y)
         self.vel = 200
         self.gravity = 1500
-        self.jump_force = 350
+        self.jump_force = 400
         self.on_ground = False
         self.keyboard = None
         self.level_colliders = None
@@ -46,7 +46,7 @@ class Player(GameObject):
                 move_y = hit["gap_y"]
                 self.vel_y = 0
         self.y += move_y
-        
+
         if self.x < 0:
             self.x += self.game.width
         elif self.x > self.game.width:
@@ -57,3 +57,19 @@ class Player(GameObject):
             self.y -= self.game.height
 
         self.collider.x, self.collider.y = self.x, self.y
+
+    def draw(self, display):
+        super().draw(display)
+        if self.x - self.width / 2 < 0:
+            self.offset_draw(display, offset_x=self.game.width)
+        elif self.x + self.width / 2 > self.game.width:
+            self.offset_draw(display, offset_x=-self.game.width)
+        if self.y - self.height / 2 < 0:
+            self.offset_draw(display, offset_y=self.game.height)
+        elif self.y + self.height / 2 > self.game.width:
+            self.offset_draw(display, offset_y=-self.game.height)
+    
+    def offset_draw(self, display, offset_x=0, offset_y=0):
+        display.draw(
+            self.image, self.x + self.offset_x + offset_x, self.y + self.offset_y + offset_y
+        )
